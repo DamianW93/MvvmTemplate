@@ -3,17 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="exampleModel"
+            type="com.wlodarczyk.mvvmtemplate.model.ExampleModel" />
+
+    </data>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.wlodarczyk.mvvmtemplate.MainActivity"
+        tools:context="com.wlodarczyk.mvvmtemplate.ui.main.MainActivity"
         tools:showIn="@layout/activity_main">
 
         <TextView
             android:id="@+id/sampleLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{exampleModel.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
