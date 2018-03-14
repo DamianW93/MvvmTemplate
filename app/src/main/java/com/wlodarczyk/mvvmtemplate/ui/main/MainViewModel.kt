@@ -1,21 +1,25 @@
 package com.wlodarczyk.mvvmtemplate.ui.main
 
-import android.databinding.ObservableField
+import android.arch.lifecycle.ViewModel
 import com.wlodarczyk.mvvmtemplate.data.ExampleRepository
-import com.wlodarczyk.mvvmtemplate.data.ExampleRepositoryCallback
+import com.wlodarczyk.mvvmtemplate.data.OnExamplesReadyCallback
+import com.wlodarczyk.mvvmtemplate.model.ExampleModel
+import io.reactivex.subjects.BehaviorSubject
 
-class MainViewModel {
+class MainViewModel : ViewModel() {
 
-    var exampleRepository: ExampleRepository = ExampleRepository()
-    val isLoading = ObservableField(false)
-    val text = ObservableField("")
+    private var exampleRepository: ExampleRepository = ExampleRepository()
 
-    fun refreshData() {
-        isLoading.set(true)
-        exampleRepository.getExampleData(object : ExampleRepositoryCallback {
-            override fun onDataReady(data: String) {
-                isLoading.set(false)
-                text.set(data)
+    val isLoading: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
+    val repositories: BehaviorSubject<ArrayList<ExampleModel>> =
+            BehaviorSubject.createDefault(arrayListOf())
+
+    fun loadExamples() {
+        isLoading.onNext(true)
+        exampleRepository.getRepositories(object : OnExamplesReadyCallback {
+            override fun onDataReady(data: ArrayList<ExampleModel>) {
+                isLoading.onNext(false)
+                repositories.onNext(data)
             }
         })
     }

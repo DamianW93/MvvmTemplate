@@ -48,20 +48,32 @@ android {
 }
 
 ext {
-    supportLibrary = '27.0.2'
+    supportLibrary = '27.1.0'
+    lifecycleAwareComponent = '1.1.0'
+    constraintLayout = '1.0.2'
+    dataBinding = '3.0.1'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     /** Support Library */
     implementation "com.android.support:appcompat-v7:$supportLibrary"
     implementation "com.android.support:design:$supportLibrary"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayout"
+    implementation "com.android.support:recyclerview-v7:$supportLibrary"
 
-    /** Data Binding */
-    kapt "com.android.databinding:compiler:3.0.1"
+    /** Lifecycle aware components */
+    implementation "android.arch.lifecycle:extensions:$lifecycleAwareComponent"
+    kapt "android.arch.lifecycle:compiler:$lifecycleAwareComponent"
+
+    /** RxJava 2 */
+    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+
+    /** Timber */
+    implementation 'com.jakewharton.timber:timber:4.6.1'
 
     /** Tests */
     testImplementation 'junit:junit:4.12'
