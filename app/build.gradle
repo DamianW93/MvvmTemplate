@@ -49,7 +49,7 @@ android {
 
 ext {
     supportLibrary = '27.1.0'
-    lifecycleAwareComponent = '1.1.0'
+    lifecycleAwareComponent = '1.1.1'
     constraintLayout = '1.0.2'
     dataBinding = '3.0.1'
 }

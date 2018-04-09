@@ -1,28 +1,21 @@
 package com.wlodarczyk.mvvmtemplate.data
 
-import android.os.Handler
-import com.wlodarczyk.mvvmtemplate.model.ExampleModel
+import android.content.Context
+import com.wlodarczyk.mvvmtemplate.data.local.ExampleLocalDataSource
+import com.wlodarczyk.mvvmtemplate.data.remote.ExampleRemoteDataSource
+import com.wlodarczyk.mvvmtemplate.util.NetworkManager
 
-class ExampleRepository {
+class ExampleRepository(context: Context) {
 
-    fun getExampleData(onDataReadyCallback: ExampleRepositoryCallback) = Handler().postDelayed({
-        onDataReadyCallback.onDataReady("example data")
-    }, 2000)
+    private val localDataSource = ExampleLocalDataSource()
+    private val remoteDataSource = ExampleRemoteDataSource()
+    private val networkManager = NetworkManager(context)
 
-    fun getRepositories(onRepositoryReadyCallback: OnExamplesReadyCallback) {
-        var arrayList = ArrayList<ExampleModel>()
-        arrayList.add(ExampleModel("First", "Owner 1"))
-        arrayList.add(ExampleModel("Second", "Owner 2"))
-        arrayList.add(ExampleModel("Third", "Owner 3"))
+    fun getRepositories() =
+            if (networkManager.isConnectedToInternet) {
+                remoteDataSource.getRepositories()
+            } else {
+                localDataSource.getRepositories()
+            }
 
-        Handler().postDelayed({ onRepositoryReadyCallback.onDataReady(arrayList) },2000)
-    }
-}
-
-interface ExampleRepositoryCallback {
-    fun onDataReady(data: String)
-}
-
-interface OnExamplesReadyCallback {
-    fun onDataReady(data : ArrayList<ExampleModel>)
 }
