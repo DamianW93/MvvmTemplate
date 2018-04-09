@@ -24,7 +24,7 @@ android {
         }
     }
 
-    dataBinding.enabled = true
+    kapt.mapDiagnosticLocations = true
 
     flavorDimensions "default"
 
@@ -48,7 +48,7 @@ android {
 }
 
 ext {
-    supportLibrary = '27.1.0'
+    supportLibrary = '27.1.1'
     lifecycleAwareComponent = '1.1.1'
     constraintLayout = '1.0.2'
     dataBinding = '3.0.1'

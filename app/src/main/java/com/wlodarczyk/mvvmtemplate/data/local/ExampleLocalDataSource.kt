@@ -1,7 +1,9 @@
 package com.wlodarczyk.mvvmtemplate.data.local
 
 import com.wlodarczyk.mvvmtemplate.model.ExampleModel
+import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
 class ExampleLocalDataSource {
@@ -14,4 +16,7 @@ class ExampleLocalDataSource {
 
         return Observable.just(arrayList).delay(2, TimeUnit.SECONDS)
     }
+
+    fun saveRepositories(arrayList: ArrayList<ExampleModel>): Completable =
+            Single.just(arrayList).delay(1,TimeUnit.SECONDS).toCompletable()
 }
