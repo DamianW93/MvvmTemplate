@@ -1,13 +1,13 @@
 package com.wlodarczyk.mvvmtemplate
 
-import android.app.Application
+import com.wlodarczyk.mvvmtemplate.dependency.app.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
-class App : Application(){
-//
-//    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-//        TODO("not implemented")
-//    }
+class App : DaggerApplication() {
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
+    }
 
 }

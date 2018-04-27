@@ -1,7 +1,6 @@
 package com.wlodarczyk.mvvmtemplate.ui.main
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.ViewModel
 import com.wlodarczyk.mvvmtemplate.data.ExampleRepository
 import com.wlodarczyk.mvvmtemplate.model.ExampleModel
 import com.wlodarczyk.mvvmtemplate.util.extension.disposeWith
@@ -10,10 +9,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val exampleRepository = ExampleRepository(getApplication())
+class MainViewModel @Inject constructor(private var exampleRepository: ExampleRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 

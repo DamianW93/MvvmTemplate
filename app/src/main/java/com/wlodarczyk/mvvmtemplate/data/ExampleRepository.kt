@@ -1,17 +1,16 @@
 package com.wlodarczyk.mvvmtemplate.data
 
-import android.content.Context
 import com.wlodarczyk.mvvmtemplate.data.local.ExampleLocalDataSource
 import com.wlodarczyk.mvvmtemplate.data.remote.ExampleRemoteDataSource
 import com.wlodarczyk.mvvmtemplate.model.ExampleModel
 import com.wlodarczyk.mvvmtemplate.util.NetworkManager
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class ExampleRepository(context: Context) {
+class ExampleRepository @Inject constructor(private val networkManager: NetworkManager) {
 
     private val localDataSource = ExampleLocalDataSource()
     private val remoteDataSource = ExampleRemoteDataSource()
-    private val networkManager = NetworkManager(context)
 
     fun getRepositories(): Observable<ArrayList<ExampleModel>> =
             if (networkManager.isConnectedToInternet) {

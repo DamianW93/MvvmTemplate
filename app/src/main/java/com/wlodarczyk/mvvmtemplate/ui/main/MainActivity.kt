@@ -1,28 +1,33 @@
 package com.wlodarczyk.mvvmtemplate.ui.main
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.wlodarczyk.mvvmtemplate.R
 import com.wlodarczyk.mvvmtemplate.ui.main.recycler.ExampleRecyclerViewAdapter
 import com.wlodarczyk.mvvmtemplate.ui.main.recycler.OnItemClickListener
-
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), OnItemClickListener {
+class MainActivity : DaggerAppCompatActivity(), OnItemClickListener {
 
     private lateinit var viewModel: MainViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(MainViewModel::class.java)
 
         initializeRecycler()
         subscribeToData()

@@ -2,8 +2,11 @@ package com.wlodarczyk.mvvmtemplate.util
 
 import android.content.Context
 import android.net.ConnectivityManager
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class NetworkManager(private var applicationContext: Context) {
+@Singleton
+class NetworkManager @Inject constructor(private var applicationContext: Context) {
 
     val isConnectedToInternet: Boolean
         get() {

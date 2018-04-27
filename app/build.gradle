@@ -50,13 +50,13 @@ android {
 ext {
     supportLibrary = '27.1.1'
     lifecycleAwareComponent = '1.1.1'
-    constraintLayout = '1.0.2'
+    constraintLayout = '1.1.0'
     dataBinding = '3.0.1'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     /** Support Library */
     implementation "com.android.support:appcompat-v7:$supportLibrary"
@@ -84,6 +84,6 @@ dependencies {
 
     /** Tests */
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
